@@ -1,0 +1,3 @@
+comando para archivo requirement.txt
+guardar  -> python -m pip freeze > requirements.txt
+instalar -> python -m pip install -r requirements.txt
