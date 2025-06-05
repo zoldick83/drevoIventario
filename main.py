@@ -1,9 +1,12 @@
-from fastapi import FastAPI
-from routers import Users
+from fastapi import FastAPI,Form, Depends
+ 
+from routers import Users, orden_compra
+from typing import Annotated
 
 app = FastAPI()
 
-app.include_router(Users.router)
+app.include_router(prefix="/Usuarios", router = Users.router)
+app.include_router(prefix="/OrdenesCompra", router = orden_compra.router)
 
 lista = [{"msg1":"hola","salida":"1"},
          {"msg2":"hola","salida":"1"},
@@ -16,5 +19,13 @@ async def bienvenida(salida:str):
         filtro = filter(lambda todo:todo['salida'] == salida, lista)
 
     return filtro
+
+#AQUI VOY A REALIZAR LA PRUEBA DE OAUTH2
+#TIENE QUE APLICARSE CON POST
+
+
+
+
+
 
 
