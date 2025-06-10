@@ -5,7 +5,7 @@ from typing import Annotated
 
 app = FastAPI()
 
-app.include_router(prefix="/Usuarios", router = Users.router)
+app.include_router(router = Users.router)
 app.include_router(prefix="/OrdenesCompra", router = orden_compra.router)
 
 lista = [{"msg1":"hola","salida":"1"},
