@@ -29,49 +29,44 @@ def validar_token(token:Annotated[str,Depends(oauth_scheme)]):
         raise Exception (f"Token invalido o expirado: {e}")
 
 #CLASES PARA SOLICITAR POST DE ORDENES DE COMPRA
-class detalle_compra(BaseModel):
-    id_detalle_oc:str
-    id_material:str
-    id_oc:str
-    descripcion:str
-    unidad:str
-    cantidad:int
-    valor_uni_neto:int
-    iva:int
-    valor_uni_bruto:int
 
-class orden_de_compra(BaseModel):
-    id_oc:str
-    id_obra:str
-    fecha_oc:date
-    detalle:List[detalle_compra]
+
+class generar_empresa(BaseModel):
+    rut_empresa:str
+    razon_social:str
+    giro:str
+    direccion:str   
+    nombre_contacto:str
+    telefono:str
+    estado:str
+    usuario:str
+
+class editar_empresa(BaseModel):
+    razon_social:str
+    giro:str
+    direccion:str   
+    nombre_contacto:str
+    telefono:str
+    estado:str
+    usuario:str
+
+class eliminar_empresa(BaseModel):
+    rut_empresa:str
+    usuario:str
 
 #GENERAR ORDEN DE COMPRA
-@router.post("/crear_oc")
-async def crear_oc(orden: orden_de_compra, User:Annotated[dict, Depends(validar_token)]):
+@router.post("/crear_empresa")
+async def crear(orden: generar_empresa, User:Annotated[dict, Depends(validar_token)]):
  
     return {"token":User}
 
-#ACTUALIZAR ORDEN DE COMPRA
-@router.get("/actualizar_oc")
-async def actualizar(User:Annotated[dict, Depends(validar_token)]):
+
+@router.put("/editar_empresa")
+async def editar(orden: editar_empresa, User:Annotated[dict, Depends(validar_token)]):
  
     return {"token":User}
 
-#ENVIAR A APROBACION ORDEN DE COMPRA
-@router.get("/eliminar_orden")
-async def token(User:Annotated[dict, Depends(validar_token)]):
- 
-    return {"token":User}
-
-#MOSTRAR ORDENES DE COMPRA
-@router.get("/obtener_ordenes")
-async def token(User:Annotated[dict, Depends(validar_token)]):
- 
-    return {"token":User}
-
-#MOSTRAR ORDEN DE COMPRA
-@router.get("/obtener_orden")
-async def token(User:Annotated[dict, Depends(validar_token)]):
+@router.delete("/eliminar_empresa")
+async def eliminar(orden: eliminar_empresa, User:Annotated[dict, Depends(validar_token)]):
  
     return {"token":User}

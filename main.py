@@ -1,10 +1,12 @@
 from fastapi import FastAPI,Form, Depends
  
-from routers import Users, orden_compra
+from routers import Users, orden_compra,Empresas,Materiales
 from typing import Annotated
 
 app = FastAPI()
 
+app.include_router(router = Empresas.router)
+app.include_router(router = Materiales.router)
 app.include_router(router = Users.router)
 app.include_router(prefix="/OrdenesCompra", router = orden_compra.router)
 
